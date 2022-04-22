@@ -7,6 +7,5 @@ width:90%;
 height: 38px;
 font-weight:500;
 border:none;
-
 `
 export default ButtonStyled
