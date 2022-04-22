@@ -11,6 +11,7 @@ export default createGlobalStyle`
         --color-primary:#FF577F;
         --color-primary-focus:#FF427F;
         --color-primary-negative:#59323F;
+        --color-white:#ffffff;
         --sucess-color:#3FE864;
         --negative-color:#E83F5B;
         --grey_0:#F8F9FA;
