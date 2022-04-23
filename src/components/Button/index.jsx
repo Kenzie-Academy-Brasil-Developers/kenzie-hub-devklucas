@@ -3,7 +3,7 @@ import ButtonStyled from './styles'
 
 const Button = ({children,...rest}) => {
     return (
-        <ButtonStyled type="submit" {...rest}>{children}</ButtonStyled>
+        <ButtonStyled {...rest}>{children}</ButtonStyled>
     )
 }
 export default Button 

@@ -1,38 +1,54 @@
 import React from 'react'
 import Button from '../Button'
+
 import FormStyled from './styles'
+import {useForm} from 'react-hook-form'
+import * as yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
+
+
 
 
 const FormRegister = () =>{
+        const schema = yup.object().shape({
+            email: yup.string().required('Email obrigatorio').email('Digite email valido'),
+            password : yup.string().min(6,'A senha precisa de pelo menos 6 caracteres'),
+            confirmPassword : yup.string().required().oneOf([yup.ref("password")], "As senhas não concidem"),
+
+        })
+        const {register, handleSubmit} = useForm({resolver:yupResolver(schema)});
+        const onSubmit = (data) => console.log(data)
+
     return (
-        <FormStyled>
+        <FormStyled onSubmit={handleSubmit(onSubmit)}>
             <h1>Crie sua conta </h1>
             <span>Rapido e grátis, vamos nessa</span>
             <div>
                 <label>Nome</label>
-                <input type="text" placeholder='Digite seu nome'/>
+                <input type="text" placeholder='Digite seu nome' {...register('name')}/>
             </div>
             <div>
                 <label>Email</label>
-                <input type="text" placeholder='Digite seu email'/>
+                <input type="text" placeholder='Digite seu email' {...register('email')}/>
             </div>
             <div>
                 <label>Senha</label>
-                <input type="text" placeholder='Digite seu senha'/>
+                <input type="password" placeholder='Digite seu senha' {...register('password')}/>
             </div>
             <div>
                 <label>Confirmar Senha</label>
-                <input type="text" placeholder='Confirme sua senha'/>
+                <input type="password" placeholder='Confirme sua senha' {...register('confirmPassword')}/>
             </div>
             <div>
                 <label>Selecionar módulo</label>
-                <select>
-                <option value="">Primeiro módulo</option>
-                <option value="">Primeiro módulo</option>
-                <option value="">Primeiro módulo</option>
+                <select {...register('module')}>
+                <option value="Primeiro módulo (Introdução ao Frontend)">Primeiro módulo (Introdução ao Frontend)</option>
+                <option value="Segundo módulo (Frontend Avançado)">Segundo módulo (Frontend Avançado)</option>
+                <option value="Terceiro módulo (Introdução ao Backend)">Terceiro módulo (Introdução ao Backend)</option>
+                <option value="Quarto módulo (Backend Avançado)">Quarto módulo (Backend Avançado)</option>
                 </select>
             </div>
-            <Button style={{backgroundColor:"#59323F"}}>Cadastrar</Button>
+            <Button  type='submit' style={{backgroundColor:"#59323F"}}>Cadastrar</Button>
         </FormStyled>
     )
 }

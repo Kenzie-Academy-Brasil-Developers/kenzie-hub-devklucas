@@ -34,5 +34,16 @@ height:70vh;
     span{
         font-size:9.63px;
     }
+    .button{
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        width:90%;
+        height: 38px;
+        font-weight:500;
+        border:none;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
 `
 export default FormStyled
