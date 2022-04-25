@@ -18,10 +18,9 @@ const Home = ({auth, setAuth, dataUser, setDataUser}) => {
     //     setShowModalModify(true)
     //     console.log(id)
     // }
-    const showModalCreateTech = () => {
-        setShowModalCreate(true)
-    }
-    
+    const showModalCreateTech = () => setShowModalCreate(true)
+    const closeModalCreateTech = () => setShowModalCreate(false)
+
     return (
         <Container>
             <div >
@@ -40,7 +39,7 @@ const Home = ({auth, setAuth, dataUser, setDataUser}) => {
             </div> 
             <BoxTech techs={dataUser.techs} /> 
 
-            {showModalCreate && <CreateTech/>          }
+            {showModalCreate ===true ? <CreateTech closeModalCreateTech={closeModalCreateTech}/> : null}
             {/* {showModalModify === true ? <ModifyTech techs={dataUser.techs} showModalModify={showModalModify}/> : null} */}
         </Container>
     )

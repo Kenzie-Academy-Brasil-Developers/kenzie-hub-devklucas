@@ -4,18 +4,30 @@ import Button from '../Button'
 import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
-
-const CreateTech = () => {
+import axios from 'axios'
+const CreateTech = ({closeModalCreateTech}) => {
     const schema = yup.object().shape({
         title: yup.string().required('Insira o nome da tecnologia')
     })
     const {register, handleSubmit, formState:{errors}} = useForm({resolver: yupResolver(schema)})
-    const onSubmit = (data) => console.log(data)
+    
+    const onSubmit = (data) => {
+       
+        const token = localStorage.getItem('token')
+        axios.post('https://kenziehub.herokuapp.com/users/techs',data,{
+            
+            headers:{
+                'Authorization': `Bearer ${token}`
+            },
+        })
+        .then((response)=> (response))
+        .catch((error)=>console.log(error))
+    }
     return (
         <Box>
             <section>
                 <h3>Cadastrar tecnologia</h3>
-                <button>X</button>
+                <button onClick={closeModalCreateTech}>X</button>
             </section>
             
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -32,7 +44,8 @@ const CreateTech = () => {
                     <option>Avançado</option>
                 </select>
                 </div>
-                <Button/>
+                
+                <Button type='submit'>Cadastrar</Button>
             </form>
         </Box>
     )
