@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import Button from '../../components/Button'
 import FormStyled from './styles'
 import {useForm} from 'react-hook-form'
@@ -8,11 +8,8 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 
-const FormLogin = ({redirectHome}) =>{
-    const [error, setError] = useState(false)
-    const [auth, setAuth] = useState(false)
-    const [dataUser, setDataUser] = useState([])
-
+const FormLogin = ({redirectHome,setError, error, auth, setAuth, setDataUser}) =>{
+   
     const schema = yup.object().shape({
         email: yup.string().required('Email obrigatorio').email('Digite email valido'),
         password : yup.string().required('Senha obrigatoria')

@@ -10,6 +10,8 @@ flex-direction: column;
         flex-direction: column;
         justify-content:center;
         align-items:center;
+        max-height: 246px;
+        overflow-y: scroll ;
     }
     li{
         background-color:var(--grey_4);

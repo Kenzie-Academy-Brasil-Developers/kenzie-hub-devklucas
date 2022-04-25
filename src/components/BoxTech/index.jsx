@@ -1,26 +1,16 @@
 import React from 'react'
 import Container from './styles'
 
-const BoxTech = () => {
-    return(
+const BoxTech = ({techs,showModifyTech}) => {
+    return (
         <Container>
             <ul>
-                <li>
-                    <h3>React</h3>
-                    <p>Intermediario</p>
-                </li>
-                <li>
-                    <h3>React</h3>
-                    <p>Intermediario</p>
-                </li>
-                <li>
-                    <h3>React</h3>
-                    <p>Intermediario</p>
-                </li>
-                <li>
-                    <h3>React</h3>
-                    <p>Intermediario</p>
-                </li>
+                {techs.map(item=>{     
+                        return <li key={item.id} /*onClick={showModifyTech(item.id)}*/>
+                                    <h3>{item.title}</h3>
+                                    <p>{item.status}</p>
+                                </li>
+                })}
             </ul>
         </Container>
     )
