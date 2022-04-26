@@ -8,8 +8,16 @@ const ModifyTech = ({techs,closeModalModifyTech,id}) => {
     const find = techs.find(item => item.id === id ? item : null)
     const {register, handleSubmit} = useForm([])
     const requestModifyTech = (data) =>{
+        const token = localStorage.getItem('token')
+        axios.put(`https://kenziehub.herokuapp.com/users/techs/${find.id}`,data,{    
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+        .then((response)=>console.log(response ))
+        .catch((error) => console.log(error))
+
         
-        // id token status
     }
     const requestDeleteTech = () =>{
         const token = localStorage.getItem('token')

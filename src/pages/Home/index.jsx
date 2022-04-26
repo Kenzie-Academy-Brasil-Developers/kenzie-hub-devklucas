@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+
 import logo from "../../assets/Logo.png";
+
+import { Container, Separator } from "./styles";  
 import { FaPlusSquare } from "react-icons/fa";
-import BoxTech from "../../components/BoxTech";
-import { Container, Separator } from "./styles";
 import { Redirect } from "react-router-dom";
 
+import BoxTech from "../../components/BoxTech";
 import CreateTech from "../../components/ModalCreateTech";
 import ModifyTech from "../../components/ModalModifyTech";
 
