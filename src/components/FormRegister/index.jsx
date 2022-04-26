@@ -5,9 +5,8 @@ import FormStyled from './styles'
 import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
-
-
-
+import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 const FormRegister = () =>{
         const schema = yup.object().shape({
@@ -16,8 +15,26 @@ const FormRegister = () =>{
             confirmPassword : yup.string().required().oneOf([yup.ref("password")], "As senhas não concidem"),
 
         })
-        const {register, handleSubmit} = useForm({resolver:yupResolver(schema)});
-        const onSubmit = (data) => console.log(data)
+        const {register, handleSubmit, formState:{errors}} = useForm({resolver:yupResolver(schema)});
+        
+        const onSubmit = (data) => {
+            const {name, email, password, course_module} = data
+            const dataRegister = {
+                name, 
+                email, 
+                password,
+                course_module,
+                contact:`linkedin/in/${name.split('').join()}`,
+                bio:'Lorem ipsum dolor emet'
+            }
+            return <Redirect to="/" />
+            
+
+            // axios.post('https://kenziehub.herokuapp.com/users',dataRegister)
+            // .then((response) => console.log(response))
+            // .cacth((error)=> console.log(error))
+
+        }
 
     return (
         <FormStyled onSubmit={handleSubmit(onSubmit)}>
@@ -26,22 +43,26 @@ const FormRegister = () =>{
             <div>
                 <label>Nome</label>
                 <input type="text" placeholder='Digite seu nome' {...register('name')}/>
+                {errors.name?.message}
             </div>
             <div>
                 <label>Email</label>
                 <input type="text" placeholder='Digite seu email' {...register('email')}/>
+                {errors.email?.message}
             </div>
             <div>
                 <label>Senha</label>
                 <input type="password" placeholder='Digite seu senha' {...register('password')}/>
+                {errors.password?.message}
             </div>
             <div>
                 <label>Confirmar Senha</label>
-                <input type="password" placeholder='Confirme sua senha' {...register('confirmPassword')}/>
+                <input type="password" placeholder='Confirme sua senha'  {...register('confirmPassword')}/>
+                {errors.confirmPassword?.message}
             </div>
             <div>
                 <label>Selecionar módulo</label>
-                <select {...register('module')}>
+                <select {...register('course_module')}>
                 <option value="Primeiro módulo (Introdução ao Frontend)">Primeiro módulo (Introdução ao Frontend)</option>
                 <option value="Segundo módulo (Frontend Avançado)">Segundo módulo (Frontend Avançado)</option>
                 <option value="Terceiro módulo (Introdução ao Backend)">Terceiro módulo (Introdução ao Backend)</option>

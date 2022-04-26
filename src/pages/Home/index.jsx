@@ -28,6 +28,7 @@ const Home = ({ auth, setAuth, dataUser, setDataUser }) => {
     setId(id);
     showModalModifyTech(true);
   };
+  
   const Logout = () => {
     setDataUser('')
     setAuth(false)

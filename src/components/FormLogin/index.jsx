@@ -46,7 +46,7 @@ const FormLogin = ({redirectHome,setError, error, auth, setAuth, setDataUser}) =
             {errors.password?.message}
             {error && <p>Usuario ou senha estao incorretos</p>}
             </div>
-            <Button type='submit'>Entrar</Button>
+            <Button type='submit' className='button'>Entrar</Button>
             
             <span>Ainda não possui uma conta?</span>
             

@@ -10,7 +10,8 @@ flex-direction: column;
         flex-direction: column;
         justify-content:center;
         align-items:center;
-        max-height: 246px;
+        min-height: 240px;
+        max-height: 240px;
         overflow-y: scroll ;
     }
     li{
