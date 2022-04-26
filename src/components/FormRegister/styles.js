@@ -9,7 +9,8 @@ align-items: center;
 margin-top: 10px;
 background-color: var(--grey_3);
 color:var(--grey_0);
-height:80vh;
+min-height:86vh;
+max-width:370px;
     h1{
         font-size:14.44px;
     }
@@ -38,5 +39,6 @@ height:80vh;
     input::placeholder {
         color:var(--grey_1);
     }
+
 `
 export default FormStyled

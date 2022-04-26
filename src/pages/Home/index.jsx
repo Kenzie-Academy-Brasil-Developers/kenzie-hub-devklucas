@@ -1,24 +1,36 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import logo from "../../assets/Logo.png";
-
+import axios from 'axios'
 import { Container, Separator } from "./styles";  
 import { FaPlusSquare } from "react-icons/fa";
-import { Redirect } from "react-router-dom";
+
 
 import BoxTech from "../../components/BoxTech";
 import CreateTech from "../../components/ModalCreateTech";
 import ModifyTech from "../../components/ModalModifyTech";
+import { Redirect } from "react-router-dom";
 
-const Home = ({ auth, setAuth, dataUser, setDataUser }) => {
+const Home = () => {
   const [id, setId] = useState([]);
   const [showModalModify, setShowModalModify] = useState(false);
   const [showModalCreate, setShowModalCreate] = useState(false);
-  
-  if (dataUser === '' ) {
-    return <Redirect to="/" />;
-  }
+  const [dataUser, setDataUser] = useState([])
+  const [techs, setDataTechs] = useState([])
 
+ 
+  const render = () => {axios.get(`https://kenziehub.herokuapp.com/users/${user}`)
+      .then((response)=> {
+        setDataUser(response.data)
+        setDataTechs(response.data.techs)
+      })
+      .catch((error) => console.log(error))
+    }
+
+  useEffect( () => {
+    render()
+  },[])
+  
   const showModalModifyTech = () => setShowModalModify(true);
   const closeModalModifyTech = () => setShowModalModify(false);
   const showModalCreateTech = () => setShowModalCreate(true);
@@ -31,9 +43,14 @@ const Home = ({ auth, setAuth, dataUser, setDataUser }) => {
   
   const Logout = () => {
     setDataUser('')
-    setAuth(false)
     localStorage.clear()
   }
+  const user = localStorage.getItem('id')
+  if(user == null){
+    return <Redirect to='/'/>
+  }  
+ 
+ 
   return (
     <Container>
       <div>
@@ -58,14 +75,20 @@ const Home = ({ auth, setAuth, dataUser, setDataUser }) => {
           onClick={() => showModalCreateTech()}
         />
       </div>
-      <BoxTech techs={dataUser.techs} sendId={sendId} />
-
+       <BoxTech techs={techs.reverse()} sendId={sendId} />
+      
+    
       {showModalCreate === true ? (
-        <CreateTech closeModalCreateTech={closeModalCreateTech} />
+        <CreateTech 
+        closeModalCreateTech={closeModalCreateTech} 
+        render={render}
+        />
       ) : null}
+      
       {showModalModify === true ? (
         <ModifyTech
-          techs={dataUser.techs}
+          render={render}
+          techs={techs}
           closeModalModifyTech={closeModalModifyTech}
           id={id}
         />

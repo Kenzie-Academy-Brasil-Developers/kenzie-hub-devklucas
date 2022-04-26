@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Button from '../Button'
 
 import FormStyled from './styles'
@@ -9,6 +9,7 @@ import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 
 const FormRegister = () =>{
+    const [isRegister, setIsRegister] = useState(false)
         const schema = yup.object().shape({
             email: yup.string().required('Email obrigatorio').email('Digite email valido'),
             password : yup.string().min(6,'A senha precisa de pelo menos 6 caracteres'),
@@ -27,7 +28,9 @@ const FormRegister = () =>{
                 contact:`linkedin/in/${name.split('').join()}`,
                 bio:'Lorem ipsum dolor emet'
             }
-            return <Redirect to="/" />
+            console.log('oi')
+            setIsRegister(true)
+            
             
 
             // axios.post('https://kenziehub.herokuapp.com/users',dataRegister)
@@ -35,7 +38,9 @@ const FormRegister = () =>{
             // .cacth((error)=> console.log(error))
 
         }
-
+        if(isRegister){
+            return <Redirect to="/" />
+        }
     return (
         <FormStyled onSubmit={handleSubmit(onSubmit)}>
             <h1>Crie sua conta </h1>

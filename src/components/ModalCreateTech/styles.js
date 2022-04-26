@@ -10,6 +10,9 @@ height:270px;
 background-color:var(--grey_3);
 position: absolute;
 border:1px solid var(--grey_1);
+    h3{
+        font-size:11.2px;
+    }
     section{
         display:flex;
         background-color:var(--grey_2);
@@ -18,14 +21,16 @@ border:1px solid var(--grey_1);
         position: absolute;
         top:0;
         align-items:center;
-        justify-content: space-around;
+        justify-content: space-between;
         color:var(--grey_0);
         font-size:11.2px;
+        padding: 0 16px;
     }
     section button{
-        background-color: var(--grey_2);
-        width: 5px;
+        width: 14px;
         color: var(--grey_1);
+        background-color: var(--grey_2);
+        border: none;
 
     }
     form{
@@ -36,13 +41,30 @@ border:1px solid var(--grey_1);
         justify-content: space-evenly;
         width:90%;
         height:calc(100% - 40px);
-        border: 1px solid white;
-        
-
+    }
+    div{
+        display:flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width:100%;
+    }
+    label{
+        font-size:10px;
+        font-family: 'Inter';
+        color:var(--grey_0);
+        margin-bottom: 17px;
     }
     input,select{
         background-color:var(--grey_2);
         border: 1px var(--grey_0) solid;
+        width:100%;
+        height:38.5px;
+        color:var(--grey_0);
+    }
+    input::placeholder{
+        color:var(--grey_0);
+    }
+    button{
         width:100%;
     }
 `

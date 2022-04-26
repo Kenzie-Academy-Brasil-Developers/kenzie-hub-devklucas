@@ -5,7 +5,9 @@ import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 import axios from 'axios'
-const CreateTech = ({closeModalCreateTech}) => {
+
+const CreateTech = ({render, closeModalCreateTech}) => {
+   
     const schema = yup.object().shape({
         title: yup.string().required('Insira o nome da tecnologia')
     })
@@ -20,7 +22,10 @@ const CreateTech = ({closeModalCreateTech}) => {
                 'Authorization': `Bearer ${token}`
             },
         })
-        .then((response)=> (response))
+        .then((response)=> {
+            render()
+            closeModalCreateTech()
+        })
         .catch((error)=>console.log(error))
     }
     return (
@@ -45,7 +50,7 @@ const CreateTech = ({closeModalCreateTech}) => {
                 </select>
                 </div>
                 
-                <Button type='submit'>Cadastrar</Button>
+                <Button type='submit' >Cadastrar</Button>
             </form>
         </Box>
     )

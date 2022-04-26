@@ -6,9 +6,11 @@ import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 
-const FormLogin = ({redirectHome,setError, error, auth, setAuth, setDataUser}) =>{
+const FormLogin = ({setError, error, setDataUser}) =>{
+    const history = useHistory();
    
     const schema = yup.object().shape({
         email: yup.string().required('Email obrigatorio').email('Digite email valido'),
@@ -22,8 +24,7 @@ const FormLogin = ({redirectHome,setError, error, auth, setAuth, setDataUser}) =
                     localStorage.setItem('id', response.data.user.id)
                     localStorage.setItem('token', response.data.token)
                     setDataUser(response.data.user)
-                    setAuth(true)
-                    redirectHome(auth)
+                    history.push(`/Home`)
                 })
                 .catch((error)=>{
                     setError(true)
@@ -56,5 +57,3 @@ const FormLogin = ({redirectHome,setError, error, auth, setAuth, setDataUser}) =
 }
 
 export default FormLogin
-//{errors.email? errors.email.message : 'Email'}
-//{errors.email? errors.password.message : 'senha'}

@@ -4,8 +4,9 @@ import axios from 'axios'
 import {useForm} from 'react-hook-form'
 
 
-const ModifyTech = ({techs,closeModalModifyTech,id}) => {
+const ModifyTech = ({render, techs,closeModalModifyTech,id}) => {
     const find = techs.find(item => item.id === id ? item : null)
+    
     const {register, handleSubmit} = useForm([])
     const requestModifyTech = (data) =>{
         const token = localStorage.getItem('token')
@@ -14,7 +15,10 @@ const ModifyTech = ({techs,closeModalModifyTech,id}) => {
                     'Authorization': `Bearer ${token}`
                 },
             })
-        .then((response)=>console.log(response ))
+        .then((response)=>{
+            closeModalModifyTech()
+            render()
+        })
         .catch((error) => console.log(error))
 
         
@@ -26,7 +30,7 @@ const ModifyTech = ({techs,closeModalModifyTech,id}) => {
                     'Authorization': `Bearer ${token}`
                 },
             })
-        .then((response)=>console.log(response ))
+        .then((response)=>closeModalModifyTech())
         .catch((error) => console.log(error))
     }
    
@@ -50,8 +54,10 @@ const ModifyTech = ({techs,closeModalModifyTech,id}) => {
                     <option value='Avançado'>Avançado</option>
                 </select>
                 </div>
-                <button onSubmit={()=>requestModifyTech()}>Salvar alterações</button>
-                <button onClick={()=>requestDeleteTech()}>Excluir</button>
+                <aside>
+                    <button className='save' onSubmit={()=>requestModifyTech()}>Salvar alterações</button>
+                    <button className='delete' onClick={()=>requestDeleteTech()}>Excluir</button>
+                </aside>
             </form>
         </Box>
     )
