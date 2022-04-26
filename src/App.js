@@ -6,10 +6,11 @@ import Register from './pages/Register'
 import Home from './pages/Home'
 
 function App() {
+  
   const [error, setError] = useState(false)
   const [auth, setAuth] = useState(false)
-  const [dataUser, setDataUser] = useState([])
-
+  const [dataUser, setDataUser] = useState('')
+  
   return (
     <>
       <GlobalStyle/>

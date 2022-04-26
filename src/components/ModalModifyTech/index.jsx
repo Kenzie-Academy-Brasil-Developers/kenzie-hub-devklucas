@@ -1,31 +1,49 @@
 import React from 'react'
 import Box from '../ModalModifyTech/styles'
+import axios from 'axios'
+import {useForm} from 'react-hook-form'
 
 
-const ModifyTech = ({techs,showModalModify}) => {
-    
+const ModifyTech = ({techs,closeModalModifyTech,id}) => {
+    const find = techs.find(item => item.id === id ? item : null)
+    const {register, handleSubmit} = useForm([])
+    const requestModifyTech = (data) =>{
+        
+        // id token status
+    }
+    const requestDeleteTech = () =>{
+        const token = localStorage.getItem('token')
+        axios.delete(`https://kenziehub.herokuapp.com/users/techs/${find.id}`,{    
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+        .then((response)=>console.log(response ))
+        .catch((error) => console.log(error))
+    }
+   
     return (
         <Box>
             <section>
                 <h3>Tecnologia Detalhes</h3>
-                <button>X</button>
+                <button onClick={()=>closeModalModifyTech()}>X</button>
             </section>
             
-            <form>
+            <form onSubmit={handleSubmit(requestModifyTech)}>
                 <div>
                 <label>Nome do projeto</label>
-                <input placeholder='Digite a tecnologia'/>
+                <input placeholder='Digite a tecnologia' defaultValue={find.title} />
                 </div>
                 <div>
                 <label>Selecionar o status</label>
-                <select>
-                    <option>Iniciante</option>
-                    <option>Intermediario</option>
-                    <option>Avançado</option>
+                <select {...register('status')}>
+                    <option value='Iniciante'>Iniciante</option>
+                    <option value='Intermediario'>Intermediario</option>
+                    <option value='Avançado'>Avançado</option>
                 </select>
                 </div>
-                <button>Salvar alterações</button>
-                <button>Excluir</button>
+                <button onSubmit={()=>requestModifyTech()}>Salvar alterações</button>
+                <button onClick={()=>requestDeleteTech()}>Excluir</button>
             </form>
         </Box>
     )

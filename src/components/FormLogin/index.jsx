@@ -17,20 +17,20 @@ const FormLogin = ({redirectHome,setError, error, auth, setAuth, setDataUser}) =
     })
     const {register, handleSubmit, formState:{errors}} = useForm({resolver: yupResolver(schema)})
     const onSubmit = (data) => {
-        axios.post('https://kenziehub.herokuapp.com/sessions',data)
-        .then((response) => {
-            localStorage.setItem('id', response.data.user.id)
-            localStorage.setItem('token', response.data.token)
-            setDataUser(response.data.user)
-            setAuth(true)
-            redirectHome(auth)
-        })
-        .catch((error)=>{
-            setError(true)
-            setTimeout(()=>{
-                setError(false)
-            },4000)
-        })
+                axios.post('https://kenziehub.herokuapp.com/sessions',data)
+                .then((response) => {
+                    localStorage.setItem('id', response.data.user.id)
+                    localStorage.setItem('token', response.data.token)
+                    setDataUser(response.data.user)
+                    setAuth(true)
+                    redirectHome(auth)
+                })
+                .catch((error)=>{
+                    setError(true)
+                    setTimeout(()=>{
+                        setError(false)
+                    },4000)
+                })
     }
     return (
         <FormStyled onSubmit={handleSubmit(onSubmit)}>

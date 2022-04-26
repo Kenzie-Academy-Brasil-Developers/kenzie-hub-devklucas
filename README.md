@@ -63,16 +63,16 @@ deletar tecnologia : DELETE /users/techs/:tech_id
 
 Desenvolvimento (tasks)
 
-- Criar página login jsx estáticas
-- Criar página register jsx estáticas
-- Criar página Home jsx estáticas
-- Criar modal em Home Cadastrar Tecnologia
-- Criar modal em Home Alterar Tecnologia
-- Criar rotas para navegação entre as páginas
-- Estilização global da aplicação para receber fonts e cores padroes.
-- Estilização versão mobile
+V- Criar página login jsx estáticas 
+V- Criar página register jsx estáticas
+V- Criar página Home jsx estáticas
+V- Criar modal em Home Cadastrar Tecnologia
+V- Criar modal em Home Alterar Tecnologia
+V- Criar rotas para navegação entre as páginas
+V- Estilização global da aplicação para receber fonts e cores padroes.
+*V- Estilização versão mobile
 - Estilização versão desktop
-- Criar component form para login do usuário, responsável por receber os dados e verificar se estam no formato esperado antes de enviar-los para request da api
-- Criar component form para criação de novo usuário, responsável por receber os dados e verificar se estam no formato esperado antes de enviar-los para request da api.
+V*- Criar component form para login do usuário, responsável por receber os dados e verificar se estam no formato esperado antes de enviar-los para request da api
+v*- Criar component form para criação de novo usuário, responsável por receber os dados e verificar se estam no formato esperado antes de enviar-los para request da api.
 - Criar request da Api
 - Integrar response da Api com a interface e exibir em tela
