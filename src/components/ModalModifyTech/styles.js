@@ -9,7 +9,8 @@ width:90%;
 height:270px;
 background-color:var(--grey_3);
 position: absolute;
-border:1px solid var(--grey_1);
+border:1px solid var(--grey_0);
+border-radius:4px;
     h3{
         font-size:11.2px;
     }
@@ -64,13 +65,39 @@ border:1px solid var(--grey_1);
     input::placeholder{
         color:var(--grey_0);
     }
-    button{
-        width:100%;
-    }
+   aside{
+       width:100%;
+       display:flex;
+       flex-wrap: nowrap;
+       flex-direction: row;
+   }
+    aside button{
+       color:var(--grey_0);
+       border: none;
+   }
+   .save{  
+       width:163px;
+       height:38px;
+       margin-right:17px;
+       background-color:var(--color-primary-negative);
+   }
+   .delete{
+       width:78px;
+       height:38px;
+       background-color:var(--grey_1);
+   }
 @media (min-width:500px){
-    width: 369px;
-        
-}
+width: 369px;
+    
+    .save{
+        width:204px;
+        margin-right: auto;
+    }
+    .delete{
+        width:98px;
+    }
+    
 
+}
 `
 export default Container

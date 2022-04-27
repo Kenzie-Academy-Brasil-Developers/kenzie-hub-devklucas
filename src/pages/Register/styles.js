@@ -20,5 +20,11 @@ height:100vh;
         font-weight:600;
         border:none;
     }
+@media(min-width:500px){
+
+header{
+    max-width:370px;
+}    
+}
 `
 export default MainStyled

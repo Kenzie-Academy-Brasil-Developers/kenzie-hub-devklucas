@@ -10,6 +10,9 @@ flex-direction: column;
         flex-direction: column;
         justify-content:center;
         align-items:center;
+        min-height: 240px;
+        max-height: 240px;
+        overflow-y: scroll ;
     }
     li{
         background-color:var(--grey_4);
@@ -34,9 +37,16 @@ flex-direction: column;
         background-color:var(--grey_2); 
         color:var(--grey_0);
     }
-    li p:hover{
-        
+@media (min-width:500px){
+min-height:416px;
+    ul{
+        min-height: 416px;
+        max-height: 416px;
     }
-   
+    ul::-webkit-scrollbar {
+    width: 0px;
+}
+}
+    
 `
 export default Container

@@ -1,38 +1,87 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Button from '../Button'
-import FormStyled from './styles'
 
+import FormStyled from './styles'
+import {useForm} from 'react-hook-form'
+import * as yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
+import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+import MessageStatus from '../MessageBox'
 
 const FormRegister = () =>{
+        const [isRegister, setIsRegister] = useState(false)
+        const [status, setStatus] = useState('') 
+        
+        const schema = yup.object().shape({
+            email: yup.string().required('Email obrigatorio').email('Digite email valido'),
+            password : yup.string().min(6,'A senha precisa de pelo menos 6 caracteres'),
+            confirmPassword : yup.string().required().oneOf([yup.ref("password")], "As senhas não concidem"),
+
+        })
+        const {register, handleSubmit, formState:{errors}} = useForm({resolver:yupResolver(schema)});
+        
+        const onSubmit = (data) => {
+            const {name, email, password, course_module} = data
+            const dataRegister = {
+                name, 
+                email, 
+                password,
+                course_module,
+                contact:`linkedin/in/exemplo`,
+                bio:'Lorem ipsum dolor emet'
+            }
+            return requestRegister(dataRegister)
+        }
+        async function requestRegister(dataRegister) {    
+            await axios.post('https://kenziehub.herokuapp.com/users',dataRegister)
+                .then((response) => {
+                    setTimeout( ()=>{
+                        setIsRegister(true)
+                    },2200)
+                    setStatus('sucess')
+                })
+                .catch((error) => setStatus('error')  )
+
+        }
+        if(isRegister){
+            return <Redirect to="/" />
+        }
     return (
-        <FormStyled>
+        <FormStyled onSubmit={handleSubmit(onSubmit)}>
             <h1>Crie sua conta </h1>
             <span>Rapido e grátis, vamos nessa</span>
             <div>
                 <label>Nome</label>
-                <input type="text" placeholder='Digite seu nome'/>
+                <input type="text" placeholder='Digite seu nome' {...register('name')}/>
+                {errors.name?.message}
             </div>
             <div>
                 <label>Email</label>
-                <input type="text" placeholder='Digite seu email'/>
+                <input type="text" placeholder='Digite seu email' {...register('email')}/>
+                {errors.email?.message}
             </div>
             <div>
                 <label>Senha</label>
-                <input type="text" placeholder='Digite seu senha'/>
+                <input type="password" placeholder='Digite seu senha' {...register('password')}/>
+                {errors.password?.message}
             </div>
             <div>
                 <label>Confirmar Senha</label>
-                <input type="text" placeholder='Confirme sua senha'/>
+                <input type="password" placeholder='Confirme sua senha'  {...register('confirmPassword')}/>
+                {errors.confirmPassword?.message}
             </div>
             <div>
                 <label>Selecionar módulo</label>
-                <select>
-                <option value="">Primeiro módulo</option>
-                <option value="">Primeiro módulo</option>
-                <option value="">Primeiro módulo</option>
+                <select {...register('course_module')}>
+                <option value="Primeiro módulo (Introdução ao Frontend)">Primeiro módulo (Introdução ao Frontend)</option>
+                <option value="Segundo módulo (Frontend Avançado)">Segundo módulo (Frontend Avançado)</option>
+                <option value="Terceiro módulo (Introdução ao Backend)">Terceiro módulo (Introdução ao Backend)</option>
+                <option value="Quarto módulo (Backend Avançado)">Quarto módulo (Backend Avançado)</option>
                 </select>
             </div>
-            <Button style={{backgroundColor:"#59323F"}}>Cadastrar</Button>
+            <Button  type='submit' style={{backgroundColor:"#59323F"}}>Cadastrar</Button>
+            {status !== '' ? <MessageStatus status={status}/> : null}
         </FormStyled>
     )
 }

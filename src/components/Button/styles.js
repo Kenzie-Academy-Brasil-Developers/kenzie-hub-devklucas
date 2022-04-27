@@ -7,5 +7,7 @@ width:90%;
 height: 38px;
 font-weight:500;
 border:none;
+font-family:'Inter';
+font-size:16px;
 `
 export default ButtonStyled

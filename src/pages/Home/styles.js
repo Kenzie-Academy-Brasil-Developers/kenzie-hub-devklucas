@@ -41,6 +41,10 @@ height:100vh;
         color:var(--grey_0);
         font-size:16px;
     }
+@media (min-width:600){
+    height:100vh;
+    min-height: 40%;
+}
 `
 export const Separator = styled.div`
     width:100vw;
