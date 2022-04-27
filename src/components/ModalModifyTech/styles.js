@@ -86,6 +86,18 @@ border-radius:4px;
        height:38px;
        background-color:var(--grey_1);
    }
+@media (min-width:500px){
+width: 369px;
+    
+    .save{
+        width:204px;
+        margin-right: auto;
+    }
+    .delete{
+        width:98px;
+    }
+    
 
+}
 `
 export default Container

@@ -30,7 +30,10 @@ const ModifyTech = ({render, techs,closeModalModifyTech,id}) => {
                     'Authorization': `Bearer ${token}`
                 },
             })
-        .then((response)=>closeModalModifyTech())
+        .then((response)=>{
+            closeModalModifyTech()
+            render()
+        })
         .catch((error) => console.log(error))
     }
    

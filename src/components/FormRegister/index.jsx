@@ -7,9 +7,12 @@ import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import MessageStatus from '../MessageBox'
 
 const FormRegister = () =>{
-    const [isRegister, setIsRegister] = useState(false)
+        const [isRegister, setIsRegister] = useState(false)
+        const [status, setStatus] = useState('') 
+        
         const schema = yup.object().shape({
             email: yup.string().required('Email obrigatorio').email('Digite email valido'),
             password : yup.string().min(6,'A senha precisa de pelo menos 6 caracteres'),
@@ -25,17 +28,20 @@ const FormRegister = () =>{
                 email, 
                 password,
                 course_module,
-                contact:`linkedin/in/${name.split('').join()}`,
+                contact:`linkedin/in/exemplo`,
                 bio:'Lorem ipsum dolor emet'
             }
-            console.log('oi')
-            setIsRegister(true)
-            
-            
-
-            // axios.post('https://kenziehub.herokuapp.com/users',dataRegister)
-            // .then((response) => console.log(response))
-            // .cacth((error)=> console.log(error))
+            return requestRegister(dataRegister)
+        }
+        async function requestRegister(dataRegister) {    
+            await axios.post('https://kenziehub.herokuapp.com/users',dataRegister)
+                .then((response) => {
+                    setTimeout( ()=>{
+                        setIsRegister(true)
+                    },2200)
+                    setStatus('sucess')
+                })
+                .catch((error) => setStatus('error')  )
 
         }
         if(isRegister){
@@ -75,6 +81,7 @@ const FormRegister = () =>{
                 </select>
             </div>
             <Button  type='submit' style={{backgroundColor:"#59323F"}}>Cadastrar</Button>
+            {status !== '' ? <MessageStatus status={status}/> : null}
         </FormStyled>
     )
 }

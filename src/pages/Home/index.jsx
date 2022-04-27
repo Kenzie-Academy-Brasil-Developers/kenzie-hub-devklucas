@@ -1,11 +1,10 @@
 import React, { useState,useEffect } from "react";
 
 import logo from "../../assets/Logo.png";
-import axios from 'axios'
 import { Container, Separator } from "./styles";  
 import { FaPlusSquare } from "react-icons/fa";
 
-
+import axios from 'axios'
 import BoxTech from "../../components/BoxTech";
 import CreateTech from "../../components/ModalCreateTech";
 import ModifyTech from "../../components/ModalModifyTech";
@@ -44,6 +43,7 @@ const Home = () => {
   const Logout = () => {
     setDataUser('')
     localStorage.clear()
+    return <Redirect to='/'/> 
   }
   const user = localStorage.getItem('id')
   if(user == null){

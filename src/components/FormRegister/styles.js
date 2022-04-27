@@ -39,6 +39,10 @@ max-width:370px;
     input::placeholder {
         color:var(--grey_1);
     }
+@media (min-width:500px){
 
+    max-height:700px;
+    
+}
 `
 export default FormStyled

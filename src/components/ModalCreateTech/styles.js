@@ -67,5 +67,10 @@ border:1px solid var(--grey_1);
     button{
         width:100%;
     }
+@media (min-width:500px){
+    width: 369px;
+        
+}
+
 `
 export default Container

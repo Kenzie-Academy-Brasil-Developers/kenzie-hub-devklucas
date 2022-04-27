@@ -37,9 +37,16 @@ flex-direction: column;
         background-color:var(--grey_2); 
         color:var(--grey_0);
     }
-    li p:hover{
-        
+@media (min-width:500px){
+min-height:416px;
+    ul{
+        min-height: 416px;
+        max-height: 416px;
     }
-   
+    ul::-webkit-scrollbar {
+    width: 0px;
+}
+}
+    
 `
 export default Container
